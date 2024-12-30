@@ -1,0 +1,10 @@
+
+
+
+<h3>Participants</h3>
+
+    {% for user in participants %}
+    <p>@{{ user.username }}</p>
+    {% empty %}
+    <p>No participants yet.</p>
+    {% endfor %}

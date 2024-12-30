@@ -10,55 +10,21 @@
     <style>
       .main-container {
         display: grid;
-        grid-template-columns: 1fr 3fr;
+        grid-template-columns: 1fr 3fr 1fr;
         gap: 20px;
       }
     </style>
 
     <div class="main-container">
-
-      <!-- Sidebar for Topics -->
       <div>
-        <div>
-          <a href="{% url 'base:home' %}">All</a>
-        </div>
-        <ul>
-          {% for topic in topics %}
-            <li><a href="{% url 'base:home' %}?q={{ topic.name }}">{{ topic.name }}</a></li>
-          {% empty %}
-            <p>No topics available.</p>
-          {% endfor %}
-        </ul>
+        {% include 'base/sidebar.html' %}
       </div>
-
-      <!-- Main Content for Rooms -->
       <div>
-        <h5>{{room_count}} rooms available</h5>
-        <a href="{% url 'base:createRoom' %}">Create Room</a>
-
-        <h1>List of Rooms</h1>
-        <ul>
-          {% for room in rooms %}
-          <li>
-            <a href="{% url 'base:room' room.id %}">
-              <h2>{{ room.name }}</h2>
-              <p>{{ room.description }}</p>
-              <p>{{ room.host }}</p>
-              <p>{{ room.topic.name }}</p>
-            </a>
-
-            {% if request.user == room.host %}
-            <a href="{% url 'base:updateRoom' room.id %}">Edit</a>
-            <a href="{% url 'base:deleteRoom' room.id %}">Delete</a>
-        {% endif %}
-
-          </li>
-          {% empty %}
-            <p>No rooms available.</p>
-          {% endfor %}
-        </ul>
+        {% include 'base/roomsdisplay.html' %}
       </div>
-
+      <div>
+        {% include 'base/activity.html' %}
+      </div>
     </div>
 
     {% endblock %}

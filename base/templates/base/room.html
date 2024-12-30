@@ -1,25 +1,35 @@
-{% extends 'main.html'%} {%block content%}
+{% extends 'main.html'%} 
+{%block content%}
+<style>
+  .parent-container {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+  }
+</style>
 
-<h1>Room</h1>
-<h2>{{ room.name }}</h2>
-<p>{{ room.description }}</p>
+<div class="parent-container">
+  <div>
+    <h1>Room</h1>
+    <h2>{{ room.name }}</h2>
+    <p>{{ room.description }}</p>
 
-<div class="comment-div">
-<h3>Comments</h3>
-<hr>
-{%for message in room_messages%}
-<small>@{{message.user}}   {{message.created|timesince}} ago</small>
-<p>{{message.body}}</p>
-<hr>
-{% endfor %}
-</div>
+    <div class="comment-div">
+      {% include 'base/commentdisplay.html' %}
+    </div>
 
-{% if request.user.is_authenticated%}
-<div class="add-comment">
-    <form action="" method="POST">
+    {% if request.user.is_authenticated%}
+    <div class="add-comment">
+      <form action="" method="POST">
         {% csrf_token %}
-<input type="text" name="body" placeholder="Enter a comment...">
-    </form>
+        <input type="text" name="body" placeholder="Enter a comment..." />
+      </form>
+    </div>
+    {%endif%}
+  </div>
+ 
+  <div>
+    {% include 'base/participants.html' %}
+  </div>
 </div>
-{%endif%}
+
 {%endblock%}

@@ -1,0 +1,29 @@
+<h5>{{room_count}} rooms available</h5>
+<a href="{% url 'base:createRoom' %}">Create Room</a>
+
+<h1>List of Rooms</h1>
+<ul>
+  {% for room in rooms %}
+  <li>
+    <a href="{% url 'base:room' room.id %}">
+      <h2>{{ room.name }}</h2>
+      <p>{{ room.description }}</p>
+      {% if room.host %}
+<a href="{% url 'base:user-profile' room.host.id %}">
+  {{ room.host }}
+</a>
+{% else %}
+<p>Host information not available</p>
+{% endif %}
+      <p>{{ room.topic.name }}</p>
+    </a>
+
+    {% if request.user == room.host %}
+    <a href="{% url 'base:updateRoom' room.id %}">Edit</a>
+    <a href="{% url 'base:deleteRoom' room.id %}">Delete</a>
+    {% endif %}
+  </li>
+  {% empty %}
+  <p>No rooms available.</p>
+  {% endfor %}
+</ul>

@@ -1,0 +1,10 @@
+<div>
+    <a href="{% url 'base:home' %}">All</a>
+  </div>
+  <ul>
+    {% for topic in topics %}
+      <li><a href="{% url 'base:home' %}?q={{ topic.name }}">{{ topic.name }}</a></li>
+    {% empty %}
+      <p>No topics available.</p>
+    {% endfor %}
+  </ul>

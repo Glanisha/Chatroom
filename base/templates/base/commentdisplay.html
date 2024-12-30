@@ -1,0 +1,12 @@
+<h3>Comments</h3>
+<hr />
+{%for message in room_messages%}
+<small>@{{message.user}} {{message.created|timesince}} ago</small>
+<p>{{message.body}}</p>
+
+{% if request.user == message.user %}
+    <a href="{% url "base:delete-message" message.id %}">Delete</a>
+{% endif %}
+
+<hr />
+{% endfor %}

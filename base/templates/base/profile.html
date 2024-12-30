@@ -1,0 +1,31 @@
+{% extends 'main.html' %}
+
+{%block content%}
+
+<style>
+    .container{
+        display: grid;
+        grid-template-columns:1fr 2fr 1fr;
+    }
+</style>
+
+
+<div class="container">
+    <div>
+{% comment %} topics {% endcomment %}
+<h1>{{user.username}}</h1>
+{%include 'base/sidebar.html' %}
+
+    </div>
+
+    <div>
+{% comment %} feed {% endcomment %}
+{%include 'base/roomsdisplay.html' %}
+    </div>
+
+    <div>
+{% comment %} activity {% endcomment %}
+{%include 'base/commentdisplay.html' %}
+    </div>
+</div>
+{%endblock%}
