@@ -1,17 +1,20 @@
+{% load static %}
 <a href="/">
     <h1>Logo</h1>
 </a>
 
-<form action="{%url 'base:home'%}" method='GET'>
-    <input type="text" name="q" placeholder="search Room ">
+<form action="{% url 'base:home' %}" method="GET">
+    <input type="text" name="q" placeholder="Search Room">
 </form>
 
 {% if user.is_authenticated %}
-    <a href="{% url 'base:logoutpage' %}">Logout</a>
+    <div class="auth-links">
+        <a href="{% url 'base:logoutpage' %}">Logout</a>
+    </div>
 {% else %}
-    <a href="{% url 'base:loginpage' %}">Login</a>
+    <div class="auth-links">
+        <a href="{% url 'base:loginpage' %}">Login</a>
+    </div>
 {% endif %}
-
-
 
 <hr>

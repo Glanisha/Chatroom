@@ -1,0 +1,20 @@
+<!-- templates/home.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Rooms</title>
+</head>
+<body>
+    <h1>List of Rooms</h1>
+    <ul>
+        {% for room in rooms %}
+            <li>
+                <h2>{{ room.name }}</h2>
+                <p>{{ room.description }}</p>
+            </li>
+        {% empty %}
+            <p>No rooms available.</p>
+        {% endfor %}
+    </ul>
+</body>
+</html>
